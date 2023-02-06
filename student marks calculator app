@@ -1,0 +1,112 @@
+import java.util.Scanner;
+
+public class StudentMarksCalculator {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Enter the number of subjects: ");
+    int numberOfSubjects = sc.nextInt();
+    int[] marks = new int[numberOfSubjects];
+    
+    for (int i = 0; i < numberOfSubjects; i++) {
+      System.out.print("Enter mark for subject " + (i + 1) + ": ");
+      marks[i] = sc.nextInt();
+    }
+    
+    int total = 0;
+    for (int i = 0; i < numberOfSubjects; i++) {
+      total += marks[i];
+    }
+    
+    double average = (double) total / numberOfSubjects;
+    System.out.println("The average marks is: " + average);
+  }
+}
+#Thu May 28 12:43:44 IST 2020
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+distributionUrl=https\://services.gradle.org/distributions/gradle-7.5-all.zip
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+
+    defaultConfig {
+        applicationId "com.example.tgk.integration"
+        minSdkVersion 11
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:22.0.0'
+}
+package com.example.studentmarkscalculator;
+
+import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.example.studentmarkscalculator.integration.R;
+
+/* Code modified from class MainActivity3 obtained from https://blackboard.algonquincollege.com/webapps/blackboard/execute/content/file?cmd=view&content_id=_968911_1&course_id=_34969_1 */
+/**
+ * An Activity with an action bar at the top that lets the user switch between sub-applications.
+ */
+public class NavigationActionBarActivity extends ActionBarActivity {
+
+    /**
+     * Called when the options menu is created; Adds items to the action bar if it is present.
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    /**
+     * Called when an action bar item is clicked; switches between sub-applications.
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        /*if (id == R.id.action_settings) {
+            return true;
+        }*/
+        switch (id){
+            //navbar menu items have been removed.
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Switches to another sub-application.
+     * @param c
+     */
+    private void go(Class c){
+        Intent intent = new Intent(this, c);
+        startActivity(intent);
+    }
+}
